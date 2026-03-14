@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #f7f8fc;
+  --foreground: #1e1b4b;
+  --accent-from: #8b5cf6;
+  --accent-to: #ec4899;
+  --card-bg: #ffffff;
+  --text-muted: #64748b;
+  --text-secondary: #94a3b8;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Subtle gradient mesh background */
+body::before {
+  content: "";
+  position: fixed;
+  top: -50%;
+  right: -20%;
+  width: 80%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, rgba(139, 92, 246, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  bottom: -30%;
+  left: -20%;
+  width: 60%;
+  height: 80%;
+  background: radial-gradient(ellipse at center, rgba(236, 72, 153, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent-from) 0%, var(--accent-to) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
