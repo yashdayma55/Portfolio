@@ -20,13 +20,21 @@ export interface Project {
   title: string;
   category: string;
   categoryColor: string;
-  chipStyle: string; // e.g. "violet" | "indigo" | "rose" | "emerald" | "cyan" | "amber" | "orange"
+  chipStyle: string;
+  filterCategory: "AI Systems" | "Security" | "ML" | "IoT" | "Full Stack" | "Embedded";
   impact: string;
   highlights: string[];
   technologies: string[];
   github: string;
   live?: string;
+  video?: string;
   featured?: boolean;
+  /** Pipeline steps for mini architecture diagram */
+  architecture?: string[];
+  /** Metric badges e.g. ["30% latency reduction", "LLM-powered"] */
+  metrics?: string[];
+  /** Optional image path in /public/projects/ */
+  image?: string;
 }
 
 export interface Publication {
@@ -35,6 +43,8 @@ export interface Publication {
   description: string;
   status: string;
   venue?: string;
+  link?: string;
+  authors?: string;
 }
 
 export interface Experience {
@@ -60,7 +70,6 @@ export interface ContactLink {
 }
 
 export const navLinks: NavLink[] = [
-  { label: "About", href: "#about" },
   { label: "Experience", href: "#experience" },
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
@@ -80,8 +89,8 @@ export const heroData: HeroData = {
     "IoT & Cloud Enthusiast",
   ],
   description: [
-    "Computer Science graduate student at George Mason University, focused on backend systems, AI-powered applications, full-stack development, cloud systems, and real-world engineering solutions.",
-    "I build AI platforms, IoT monitoring systems, and production-grade software projects that combine intelligence, scalability, and automation.",
+    "I am a Master's student in Computer Science at George Mason University with a focus on backend engineering, AI-powered systems, DevOps automation, and wireless/embedded technologies. My work centers on designing and building scalable backend architectures that integrate machine learning, intelligent data processing, and cloud-native deployment pipelines.",
+    "I have experience developing AI-driven applications using large language models and NLP pipelines, building robust backend APIs and distributed systems, and deploying production-ready platforms using Docker, CI/CD pipelines, and cloud infrastructure. Additionally, I have worked on wireless sensor networks and embedded systems, creating real-world IoT solutions that bridge hardware and software.",
   ],
   stats: [
     { label: "Master's Student @ GMU" },
@@ -191,6 +200,7 @@ export const projects: Project[] = [
     category: "AI / Healthcare Platform",
     categoryColor: "bg-violet-500/15 text-violet-700 border-violet-200/50",
     chipStyle: "violet",
+    filterCategory: "AI Systems",
     impact:
       "AI-powered healthcare platform that transforms medical PDFs into structured clinical records and enables intelligent patient history analysis through LLM-driven summaries.",
     highlights: [
@@ -203,12 +213,36 @@ export const projects: Project[] = [
     github: "https://github.com/yashdayma55/medledger-ai",
     live: "https://medledger-ai-c2z1.vercel.app/",
     featured: true,
+    architecture: ["PDF Upload", "LLM Extraction", "Structured JSON", "Patient Timeline", "AI Summary"],
+    metrics: ["80% faster extraction", "LLM-powered", "Role-based platform"],
+    image: "medledger.png",
+  },
+  {
+    title: "Lung Cancer Prediction",
+    category: "ML / Healthcare",
+    categoryColor: "bg-indigo-500/15 text-indigo-700 border-indigo-200/50",
+    chipStyle: "indigo",
+    filterCategory: "ML",
+    impact:
+      "Predictive analysis of lung cancer risk using machine learning. Provides a clean pipeline for training, evaluating, and serving the model—with saved model artifacts, Tkinter GUI with validation, FastAPI web API, and a simple web UI.",
+    highlights: [
+      "Training and evaluation scripts; persisted model artifact (no retraining on every run)",
+      "FastAPI REST API with POST /predict for risk inference from demographics and symptoms",
+      "Tkinter desktop GUI with input validation; simple web UI for browser-based predictions",
+      "Structured outputs: metrics.json, ROC curve plots; reproducible pipeline (data → models → reports)",
+    ],
+    technologies: ["Python", "Scikit-learn", "FastAPI", "Tkinter", "Uvicorn"],
+    github: "https://github.com/yashdayma55/lung-cancer-prediction",
+    live: undefined,
+    architecture: ["Input Data", "Feature Eng", "Model Inference", "Risk Report"],
+    metrics: ["REST API", "Tkinter GUI", "ROC metrics"],
   },
   {
     title: "DealHunter",
     category: "Full-Stack System",
     categoryColor: "bg-indigo-500/15 text-indigo-700 border-indigo-200/50",
     chipStyle: "indigo",
+    filterCategory: "Full Stack",
     impact:
       "Real-time deal intelligence platform that automatically scrapes and aggregates mobile app deals from Reddit and Telegram using custom filtering pipelines and a scalable full-stack architecture.",
     highlights: [
@@ -220,29 +254,38 @@ export const projects: Project[] = [
     technologies: ["Next.js", "Node.js", "TypeScript", "Supabase", "PostgreSQL", "TailwindCSS", "Vercel"],
     github: "https://github.com/yashdayma55/DealHunter",
     live: "https://deals-frontend-brown.vercel.app/",
+    architecture: ["Reddit/Telegram", "Scraping Pipeline", "Filter Engine", "Chrome Extension"],
+    metrics: ["Real-time deals", "Spam filtering", "Extension"],
   },
   {
     title: "GMU SmartPatriot",
     category: "LLM / RAG System",
     categoryColor: "bg-rose-500/15 text-rose-700 border-rose-200/50",
     chipStyle: "rose",
+    filterCategory: "AI Systems",
     impact:
-      "University knowledge engine using LLM grounding and RAG for intelligent Q&A over institutional knowledge at George Mason University.",
+      "Patriot is a prototype GMU virtual assistant that answers questions about George Mason University using live web pages when possible. It summarizes catalog, department, and registrar info—ideal for programs, courses, deadlines, and offices. Built with LLM grounding and RAG; not an official GMU tool.",
     highlights: [
-      "RAG pipeline for retrieval-augmented generation over docs",
-      "Vector database integration for semantic search",
-      "LLM-powered Q&A with source citations",
-      "Built for GMU institutional knowledge base",
+      "RAG pipeline for retrieval-augmented generation over institutional docs",
+      "Vector database integration for semantic search over GMU knowledge base",
+      "LLM-powered Q&A with source citations; uses live GMU web pages when available",
+      "Answers programs, courses, deadlines, offices; prompts users to confirm with official GMU offices",
     ],
-    technologies: ["TypeScript", "RAG", "LLMs", "Vector DB"],
+    technologies: ["Next.js", "TypeScript", "RAG", "LLMs", "Vector DB", "Vercel"],
     github: "https://github.com/yashdayma55/gmu-smartpatriot",
-    live: undefined,
+    live: "https://gmu-smartpatriot-55.vercel.app/",
+    video: "https://youtu.be/cE7DzSwmRg0?si=wtl6cNYVggVgw2z4",
+    featured: true,
+    architecture: ["GMU Docs", "Vector DB", "RAG Retrieval", "LLM Q&A", "Citations"],
+    metrics: ["Live web pages", "Source citations", "University knowledge"],
+    image: "smartpatriot.png",
   },
   {
     title: "IoT Factory Monitor",
     category: "Industry Deployment · CEAT Tires",
     categoryColor: "bg-emerald-500/15 text-emerald-700 border-emerald-200/50",
     chipStyle: "emerald",
+    filterCategory: "IoT",
     impact:
       "Production-grade IoT factory monitoring system deployed at CEAT Tires, Nagpur—enabling real-time environmental monitoring, anomaly detection, and proactive maintenance across industrial units. Built during Cognifront internship.",
     highlights: [
@@ -258,12 +301,16 @@ export const projects: Project[] = [
     github: "https://github.com/yashdayma55/iot-enterprise-factory-monitor",
     live: undefined,
     featured: true,
+    architecture: ["ESP32 Sensors", "ESP-NOW Repeaters", "Raspberry Pi", "MySQL", "Dashboard", "SMS Alerts"],
+    metrics: ["30% latency reduction", "CEAT deployed", "Real-time monitoring"],
+    image: "iot-monitor.png",
   },
   {
     title: "DebateMind",
     category: "AI Multi-Agent System",
     categoryColor: "bg-amber-500/15 text-amber-700 border-amber-200/50",
     chipStyle: "amber",
+    filterCategory: "AI Systems",
     impact:
       "Multi-agent AI debate system where Pro and Con agents argue in real time, with an AI Judge delivering structured evaluations. Orchestrates four specialized agents—Moderator, Pro, Con, and Judge—for formal debates on any topic with configurable rounds and multimodal context.",
     highlights: [
@@ -276,12 +323,15 @@ export const projects: Project[] = [
     technologies: ["Next.js", "React", "TypeScript", "Tailwind", "FastAPI", "LangGraph", "OpenAI", "Ollama", "PyPDF"],
     github: "https://github.com/yashdayma55/DebateMind",
     live: "https://debate-mind.vercel.app/",
+    architecture: ["Topic Input", "Moderator Agent", "Pro + Con Agents", "Judge Agent", "Evaluation"],
+    metrics: ["4 AI agents", "30–40% faster", "Multimodal"],
   },
   {
     title: "CyberShield AI",
     category: "AI / Security Platform",
     categoryColor: "bg-rose-500/15 text-rose-700 border-rose-200/50",
     chipStyle: "rose",
+    filterCategory: "Security",
     impact:
       "Security intelligence platform combining AI-powered chat for threats and best practices, a Chrome extension for live browsing protection with real-time alerts, a multi-agent file analysis pipeline, and Fetch.ai uAgents integration for decentralized workflows.",
     highlights: [
@@ -295,12 +345,17 @@ export const projects: Project[] = [
     technologies: ["Python", "FastAPI", "OpenAI", "uAgents", "Chrome Extension", "Docker", "Render"],
     github: "https://github.com/yashdayma55/Cybershield-ai",
     live: undefined,
+    featured: true,
+    architecture: ["Chrome Extension", "REST API", "LLM Chat", "File Pipeline", "uAgents"],
+    metrics: ["Live browser protection", "Multi-agent pipeline", "Fetch.ai compatible"],
+    image: "cybershield.png",
   },
   {
     title: "UniSurvey",
     category: "Full-Stack · DevOps",
     categoryColor: "bg-orange-500/15 text-orange-700 border-orange-200/50",
     chipStyle: "orange",
+    filterCategory: "Full Stack",
     impact:
       "Full-stack web application for prospective students to submit campus-visit feedback through an intelligent survey form. Includes admin CRUD, Docker/Kubernetes deployment on Rancher, and Jenkins CI/CD pipeline. Team project with Chaitanya Chaudhari and Ankit Raut.",
     highlights: [
@@ -314,12 +369,15 @@ export const projects: Project[] = [
     technologies: ["Angular", "Spring Boot", "MySQL", "Maven", "Docker", "Kubernetes", "Rancher", "Jenkins", "AWS RDS"],
     github: "https://github.com/yashdayma55/UniSurvey",
     live: undefined,
+    architecture: ["Angular App", "Spring Boot API", "RDS MySQL", "Docker", "K8s Rancher"],
+    metrics: ["3+ pods HA", "Jenkins CI/CD", "Admin CRUD"],
   },
   {
     title: "Li-Fi Communication System",
     category: "Embedded Systems",
     categoryColor: "bg-cyan-500/15 text-cyan-700 border-cyan-200/50",
     chipStyle: "cyan",
+    filterCategory: "Embedded",
     impact:
       "Multi-modulation visible light communication system using LED and photodiode for short-range wireless data transmission with ACK-based reliability. Implements a complete physical + link layer stack with OOK, FSK, and PWM modulation on Arduino.",
     highlights: [
@@ -333,25 +391,21 @@ export const projects: Project[] = [
     github:
       "https://github.com/yashdayma55/Li-Fi-Communication-System-Using-LED-and-Photodiode",
     live: undefined,
+    architecture: ["Application", "OOK/FSK/PWM", "LED TX", "Photodiode RX", "ACK Protocol"],
+    metrics: ["3 modulations", "Lowest BER", "Link-layer protocol"],
   },
 ];
 
 export const publications: Publication[] = [
   {
-    title: "Predictive Analysis of Lung Cancer",
+    title: "IoT Based Factory Monitoring System",
     type: "Conference Paper",
     description:
-      "Research on predictive analytics and machine learning approaches for lung cancer detection and prognosis.",
-    status: "Under Review",
-    venue: undefined,
-  },
-  {
-    title: "IoT Based Enterprise-Wide Factory Monitoring System",
-    type: "Publication",
-    description:
-      "Production-grade IoT-based industrial monitoring with real-time analytics, anomaly detection, and multi-hop wireless sensor networks deployed in CEAT Tires project.",
+      "IoT-based temperature and humidity monitoring using a private wireless sensor network (WSN) for secure data transmission from sensor nodes to the server. Features DHT-22 sensors, ESP-NOW repeater network, Raspberry Pi server, web-based dashboard with trends and device configuration, and SMS alert gateway via TTGO Sim800L for supervisors when thresholds are exceeded.",
     status: "Published",
-    venue: "IJSRED (IC-RTETM-23)",
+    venue: "2nd Int. Conf. on Recent Trends in Engineering, Science, Technology & Management (IC-RTETM-23) · IJSRED",
+    link: "https://ijsred.com/special-issues/ic-rtetm-23/IC-RTETM-199.pdf",
+    authors: "Sakshi Ahire, Yash Dayma, Rutuja Kshirsagar, Gayatri Chaudhari, Prof. S.V. Pawar · MVP's KBT College of Engineering",
   },
 ];
 
@@ -403,6 +457,11 @@ export const contactData = {
       platform: "Email",
       href: "mailto:yashdayma55@gmail.com",
       label: "yashdayma55@gmail.com",
+    },
+    {
+      platform: "Phone",
+      href: "tel:+12029977304",
+      label: "+1 (202) 997-7304",
     },
   ] as ContactLink[],
 };

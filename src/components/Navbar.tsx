@@ -15,10 +15,10 @@ export default function Navbar() {
           <div className="flex items-center justify-between">
             <a
               href="#"
-              className="font-mono text-sm text-secondary hover:text-primary transition-colors"
+              className="text-sm font-medium text-secondary hover:text-primary transition-colors"
               onClick={() => setMobileOpen(false)}
             >
-              ⟨ dev.portfolio /⟩
+              Home
             </a>
 
             {/* Desktop nav */}

@@ -251,9 +251,6 @@ export default function Skills() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="font-mono text-sm text-secondary mb-2">
-            {"// tech_stack"}
-          </p>
           <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-primary mb-4">
             Tech Stack
           </h2>

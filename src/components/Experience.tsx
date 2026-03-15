@@ -33,7 +33,6 @@ export default function Experience() {
         viewport={{ once: true }}
         transition={{ duration: 0.65 }}
       >
-        <p className="font-mono text-sm text-secondary mb-2">{"// experience"}</p>
         <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-primary mb-16">
           Experience
         </h2>

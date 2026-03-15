@@ -125,3 +125,110 @@ body {
   pointer-events: none;
   z-index: 0;
 }
+
+/* ━━━ Bento Projects ━━━ */
+#projects {
+  background: #f8f7ff;
+}
+
+.bento-card {
+  border-radius: 20px;
+  padding: 28px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.28s ease;
+}
+.bento-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    transparent 100%
+  );
+  transform: skewX(-15deg) translateX(-100%);
+  transition: transform 0.7s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.bento-card:hover {
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+}
+.bento-card:hover::before {
+  transform: skewX(-15deg) translateX(500%);
+}
+
+/* Bento card themes */
+.bento-purple {
+  background: linear-gradient(145deg, #ede9fe, #f5f3ff, #faf5ff);
+  border: 1.5px solid #ddd6fe;
+}
+.bento-amber {
+  background: linear-gradient(145deg, #fffbeb, #fef9ec, #fffdf5);
+  border: 1.5px solid #fde68a;
+}
+.bento-pink {
+  background: linear-gradient(145deg, #fdf2f8, #fce7f3, #fdf4fb);
+  border: 1.5px solid #fbcfe8;
+}
+.bento-green {
+  background: linear-gradient(145deg, #ecfdf5, #f0fdf4, #f7fef9);
+  border: 1.5px solid #bbf7d0;
+}
+.bento-blue {
+  background: linear-gradient(145deg, #eff6ff, #f0f9ff, #f5fbff);
+  border: 1.5px solid #bfdbfe;
+}
+.bento-teal {
+  background: linear-gradient(145deg, #f0fdfa, #f0fffd, #f5fffe);
+  border: 1.5px solid #99f6e4;
+}
+
+/* Bento scroll-in */
+.bento-scroll {
+  opacity: 0;
+  transform: translateY(30px) scale(0.97);
+  transition: opacity 0.5s ease,
+    transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.bento-scroll.in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* IoT pulse dot */
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(0.6);
+  }
+}
+.bento-pulse-dot {
+  animation: pulse-dot 1.8s ease-in-out infinite;
+}
+
+/* Bento stat progress bar */
+.bento-progress {
+  height: 4px;
+  border-radius: 99px;
+  background: rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+.bento-progress-bar {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.bento-progress.in .bento-progress-bar {
+  width: var(--progress-width, 85%) !important;
+}
