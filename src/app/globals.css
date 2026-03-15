@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --background: #f7f8fc;
+  --background: #f0f4ff;
   --foreground: #1e1b4b;
-  --accent-from: #8b5cf6;
+  --primary: #1e1b4b;
+  --secondary: #64748b;
+  --accent-from: #6366f1;
+  --accent-mid: #8b5cf6;
   --accent-to: #ec4899;
-  --card-bg: #ffffff;
-  --text-muted: #64748b;
-  --text-secondary: #94a3b8;
 }
 
 * {
@@ -25,43 +25,103 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), system-ui, sans-serif;
-}
-
-/* Subtle gradient mesh background */
-body::before {
-  content: "";
-  position: fixed;
-  top: -50%;
-  right: -20%;
-  width: 80%;
-  height: 100%;
-  background: radial-gradient(ellipse at center, rgba(139, 92, 246, 0.06) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-body::after {
-  content: "";
-  position: fixed;
-  bottom: -30%;
-  left: -20%;
-  width: 60%;
-  height: 80%;
-  background: radial-gradient(ellipse at center, rgba(236, 72, 153, 0.05) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
+  font-family: var(--font-body), system-ui, sans-serif;
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, var(--accent-from) 0%, var(--accent-to) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--accent-from) 0%,
+    var(--accent-mid) 50%,
+    var(--accent-to) 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* Glassmorphism utility */
+.glass {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+/* Floating navbar - transparent glass */
+.navbar-floating {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 30px rgba(99, 102, 241, 0.08);
+}
+
+/* Background blobs - floating animation */
+@keyframes float {
+  0% {
+    transform: translateY(0) scale(1);
   }
+  100% {
+    transform: translateY(-28px) scale(1.02);
+  }
+}
+
+.blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.5;
+  pointer-events: none;
+  animation: float 8s ease-in-out infinite alternate;
+}
+
+.blob-1 {
+  width: 400px;
+  height: 400px;
+  background: rgba(199, 210, 254, 0.6);
+  top: -10%;
+  right: -5%;
+  animation-delay: 0s;
+}
+
+.blob-2 {
+  width: 350px;
+  height: 350px;
+  background: rgba(254, 215, 215, 0.5);
+  bottom: 20%;
+  left: -8%;
+  animation-delay: -2s;
+}
+
+.blob-3 {
+  width: 300px;
+  height: 300px;
+  background: rgba(167, 243, 208, 0.45);
+  top: 50%;
+  right: 10%;
+  animation-delay: -4s;
+}
+
+.blob-4 {
+  width: 320px;
+  height: 320px;
+  background: rgba(251, 207, 232, 0.5);
+  bottom: -5%;
+  right: 20%;
+  animation-delay: -6s;
+}
+
+/* Grid overlay */
+.grid-overlay {
+  position: fixed;
+  inset: 0;
+  background-image: linear-gradient(
+      rgba(99, 102, 241, 0.06) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(99, 102, 241, 0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
 }

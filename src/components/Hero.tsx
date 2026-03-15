@@ -1,63 +1,75 @@
 "use client";
 
+import { TypeAnimation } from "react-type-animation";
+import { motion } from "framer-motion";
+import { heroData, resumePath } from "@/data/portfolio";
+
 export default function Hero() {
   return (
-    <section id="about" className="pt-32 pb-20 px-6 max-w-6xl mx-auto">
-      <div className="animate-fade-in opacity-0" style={{ animationDelay: "0.1s" }}>
-        <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 text-sm font-medium mb-6 border border-emerald-100">
+    <section className="pt-28 pb-20 px-6 max-w-6xl mx-auto">
+      <motion.div
+        initial={{ opacity: 0, y: 32 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.65 }}
+        className="space-y-6"
+      >
+        <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass text-sm font-medium text-secondary border border-white/80 shadow-glass">
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          available for hire
+          {heroData.availability}
         </span>
 
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-text-primary mb-3 leading-tight">
-          Hi, I&apos;m{" "}
-          <span className="gradient-text">Yash Dayma</span>
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold text-primary leading-tight">
+          Hi, I&apos;m <span className="gradient-text">{heroData.name}</span>
         </h1>
 
-        <div className="flex items-center gap-2 mb-4">
-          <h2 className="text-xl md:text-2xl text-text-primary font-semibold">
-            AI & Backend Engineer
-          </h2>
-          <span className="w-0.5 h-6 bg-accent-purple animate-blink-cursor" />
+        <div className="flex items-center gap-2 min-h-[2.5rem]">
+          <TypeAnimation
+            sequence={heroData.roles.flatMap((role) => [role, 2000])}
+            wrapper="span"
+            speed={40}
+            deletionSpeed={60}
+            repeat={Infinity}
+            cursor={false}
+            className="text-xl md:text-2xl font-heading font-semibold text-primary"
+          />
+          <span className="w-0.5 h-6 bg-accent-indigo animate-blink" />
         </div>
 
-        <p className="text-lg text-text-secondary max-w-2xl mb-8 leading-relaxed">
-          I build intelligent software systems — from AI-powered applications and scalable backend
-          systems to cloud-native DevOps pipelines. Clean architecture, clean code.
+        <p className="text-lg text-secondary max-w-2xl leading-relaxed">
+          {heroData.description[0]}
+        </p>
+        <p className="text-secondary max-w-2xl leading-relaxed">
+          {heroData.description[1]}
         </p>
 
-        <div className="flex flex-wrap gap-4 mb-12">
+        <div className="flex flex-wrap gap-4 pt-2">
           <a
             href="#projects"
-            className="px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-medium hover:from-indigo-700 hover:to-purple-700 transition-all shadow-card hover:shadow-glow"
+            className="px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500 text-white font-medium hover:shadow-glass-hover hover:-translate-y-0.5 transition-all"
           >
             View Projects
           </a>
           <a
-            href="/cv.pdf"
+            href={resumePath}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-3 rounded-xl bg-white text-text-primary font-medium border-2 border-indigo-200 hover:border-indigo-400 hover:shadow-card transition-all"
+            className="px-6 py-3 rounded-xl glass border border-white/80 font-medium hover:shadow-glass-hover hover:-translate-y-0.5 transition-all"
           >
-            Download CV
+            Download Resume
           </a>
         </div>
 
-        <div className="flex flex-wrap gap-6">
-          <div className="px-6 py-4 rounded-2xl bg-white shadow-card border border-indigo-50/50">
-            <span className="gradient-text font-bold text-2xl">18+</span>
-            <span className="text-text-primary ml-1">repos</span>
-          </div>
-          <div className="px-6 py-4 rounded-2xl bg-white shadow-card border border-indigo-50/50">
-            <span className="gradient-text font-bold text-2xl">6+</span>
-            <span className="text-text-primary ml-1">projects shipped</span>
-          </div>
-          <div className="px-6 py-4 rounded-2xl bg-white shadow-card border border-indigo-50/50">
-            <span className="gradient-text font-bold text-2xl">MS</span>
-            <span className="text-text-primary ml-1">Computer Science @ GMU</span>
-          </div>
+        <div className="flex flex-wrap gap-4 pt-6">
+          {heroData.stats.map((stat) => (
+            <div
+              key={stat.label}
+              className="px-4 py-2 rounded-xl glass border border-white/80 text-sm text-secondary"
+            >
+              {stat.label}
+            </div>
+          ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
